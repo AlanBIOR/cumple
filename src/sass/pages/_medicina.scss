@@ -1,0 +1,39 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.medicine-independent-page {
+  @include paper-texture; // Tu mixin de papel viejo
+  overflow-x: hidden;
+  
+  // Efecto decorativo de arterias en las esquinas
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/src/img/arteries-frame.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    pointer-events: none; // Para que no estorbe al hacer clic
+    z-index: 1;
+  }
+
+  .floating-heart {
+    max-width: 200px;
+    display: block;
+    margin: 2rem auto;
+    filter: drop-shadow(0 0 15px rgba($accent-color, 0.2));
+    animation: heartbeat 1.5s infinite ease-in-out;
+  }
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}

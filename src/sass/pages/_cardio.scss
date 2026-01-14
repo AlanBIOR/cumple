@@ -1,0 +1,66 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.cardio-independent-page {
+    @include paper-texture; // Tu mixin de textura de papel antiguo
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    // Grid específico para este capítulo
+    .cardio-main-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        align-items: center;
+        padding: 2rem;
+
+        @include breakpoint(tablet) {
+            grid-template-columns: 1fr 1fr; // Dos columnas en PC
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    }
+
+    // Estilo del manuscrito (Caja de texto)
+    .cardio-text-manuscript {
+        padding: 3rem;
+        background: rgba(white, 0.2);
+        border: 1px solid rgba($accent-color, 0.2); // Borde fino médico
+        position: relative;
+        
+        // Marco de esquinas rojas (estilo image_c66bed.png)
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid $accent-color;
+            clip-path: polygon(0 0, 15% 0, 15% 1px, 1px 1px, 1px 15%, 0 15%, // Esquina sup-izq
+                               0 85%, 1px 85%, 1px 99%, 15% 99%, 15% 100%, 0 100%, // Esquina inf-izq
+                               85% 100%, 85% 99%, 99% 99%, 99% 85%, 100% 85%, 100% 100%, // Esquina inf-der
+                               100% 15%, 99% 15%, 99% 1px, 85% 1px, 85% 0, 100% 0); // Esquina sup-der
+        }
+    }
+
+    // Títulos con tipografías de fantasía/vintage
+    .cardio-main-title {
+        font-family: $font-vintage;
+        color: $accent-color;
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    .cardio-paragraph {
+        font-family: $font-body; // Lora o EB Garamond
+        line-height: 1.8;
+        font-size: 1.2rem;
+        text-align: justify;
+
+        &::first-letter {
+            font-size: 4rem;
+            color: $accent-color;
+            float: left;
+            margin-right: 10px;
+            font-family: $font-vintage;
+        }
+    }
+}

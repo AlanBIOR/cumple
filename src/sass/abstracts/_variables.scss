@@ -1,0 +1,26 @@
+$bp-tablet: 768px;
+$bp-tablet-horizontal: 1024px;
+$bp-desktop: 1200px;
+$bp-desktop-xl: 1440px;
+
+// Variables Actualizadas
+$font-vintage: "Bigelow Rules", serif; // Para detalles victorianos/médicos
+$font-header: "EB Garamond", serif;     // Para títulos elegantes
+$font-body: "Lora", serif;              // Para los textos que ella va a leer
+
+// 1. Colores
+$bg-color: #EAD8B1;
+$ink-color: #1A1A1A;
+$accent-color: #a62626; // El rojo de la ilustración médica
+$color-border: #7D7461;
+$color-muted: #6e6b64;
+$color-bg-alt: #ece8df;
+$color-gold: #c5a059;
+
+$bg-color-dark: #EFE3C2; // Para degradados sutiles o bordes
+$paper-grain: rgba(125, 116, 97, 0.05); // Color de la "fibra" del papel
+
+// Decoración
+$border-thin: 1px solid rgba($ink-color, 0.3);
+$shadow-vintage: 0 10px 30px rgba(0, 0, 0, 0.05);
+$transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);

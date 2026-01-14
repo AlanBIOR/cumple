@@ -1,0 +1,45 @@
+@use '../abstracts/variables' as *;
+
+.main-footer {
+  width: 100%;
+  padding: 2rem 0; // Espacio generoso para que respire
+  text-align: center;
+  position: relative;
+  
+  // Una línea divisoria elegante y sutil
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($accent-color, 0.4), transparent);
+  }
+
+  .medical-note {
+    font-family: $font-header; // EB Garamond para elegancia
+    color: $color-muted;
+    font-style: italic;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
+
+    // Detalle del símbolo médico ℞ al inicio de la nota
+    &::before {
+      content: '℞'; 
+      font-family: $font-vintage; // Bigelow Rules para el toque victoriano
+      color: $accent-color;
+      font-size: 1.8rem;
+      vertical-align: middle;
+      margin-right: 0.8rem;
+      font-style: normal;
+      opacity: 0.8;
+    }
+
+    // Efecto de "tinta desvanecida" sutil
+    text-shadow: 1px 1px 2px rgba($ink-color, 0.05);
+  }
+}

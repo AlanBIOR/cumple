@@ -1,0 +1,19 @@
+@use 'animations'as *;
+@use 'reset'as *;
+@use 'typography'as *;
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// src/sass/base/_base.scss
+
+body, html, #app {
+  background-color: $bg-color;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.main-header {
+  background-color: $bg-color; // Asegura que el header no sea blanco
+}

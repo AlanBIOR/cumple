@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as *;
+
+.main-header {
+    text-align: center;
+    padding: 4rem 1rem;
+    
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 4.5rem;
+        margin: 0;
+    }
+
+    .subtitle {
+        font-family: $font-header;
+        font-style: italic;
+        color: $color-muted;
+    }
+}

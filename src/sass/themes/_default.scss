@@ -1,0 +1,20 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+html * {
+    font-family: $font-header;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    color: $ink-color;
+    background-color: $bg-color;
+    @include paper-texture; // Aplicamos el mixin que ya tienes
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}

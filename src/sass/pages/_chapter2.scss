@@ -1,0 +1,109 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.reading-independent-page {
+  background-color: $bg-color; // #EAD8B1
+  color: #2a2a2a;
+  min-height: 100vh;
+  padding: 2rem;
+
+  .chapter-nav {
+    padding: 2rem;
+    .back-link {
+      font-family: $font-header;
+      text-decoration: none;
+      color: $color-muted;
+      font-size: 0.9rem;
+      transition: $transition-smooth;
+      &:hover { color: $accent-color; }
+    }
+  }
+
+  .handbook-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    background: transparent;
+    position: relative;
+
+    // --- ENCABEZADO Y PIE DE PÁGINA DECORATIVOS ---
+    .handbook-header, .handbook-footer {
+      text-align: center;
+      font-family: $font-vintage;
+      color: rgba($ink-color, 0.6);
+      font-size: 0.8rem;
+      margin: 2rem 0;
+
+      .decorative-line, .decorative-line-bottom {
+        display: flex;
+        align-items: center;
+        &::before, &::after {
+          content: '————— ☙ —————';
+          flex: 1;
+          letter-spacing: -2px;
+        }
+        span { padding: 0 1rem; }
+      }
+    }
+
+    // --- ESTRUCTURA DE ENTRADAS (ESTILO BESTIARIO) ---
+    .handbook-entry {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      align-items: center;
+
+
+      @include breakpoint(mobile) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .entry-visual {
+        flex: 0 0 150px; // Ancho fijo para la imagen
+        .entry-img {
+          width: 100%;
+          mix-blend-mode: multiply; // Elimina el fondo blanco
+          filter: sepia(0.2) contrast(1.1);
+          
+          &.roots-variant { transform: rotate(-10deg) scaleX(-1); }
+          &.garden-variant { transform: scale(1); filter: hue-rotate(10deg) multiply; }
+        }
+      }
+
+      .entry-text {
+        flex: 1;
+        .entry-title {
+          font-family: $font-vintage;
+          font-size: 2.2rem;
+          margin: 0 0 1rem 0;
+          color: $ink-color;
+          line-height: 1;
+        }
+
+        p {
+          font-family: $font-header; // EB Garamond para cuerpo de texto
+          font-size: 1.1rem;
+          line-height: 1.5;
+          text-align: left;
+          margin: 0;
+          color: #333;
+        }
+      }
+    }
+
+    .title-block {
+      text-align: center;
+      margin-bottom: 5rem;
+      .chapter-title {
+        font-family: $font-vintage;
+        font-size: 4rem;
+        margin: 0;
+      }
+      .literary-quote {
+        font-family: $font-body;
+        font-style: italic;
+        opacity: 0.7;
+      }
+    }
+  }
+}

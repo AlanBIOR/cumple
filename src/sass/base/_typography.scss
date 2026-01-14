@@ -1,0 +1,16 @@
+@use '../abstracts/variables' as *;
+
+h1, .vintage-title {
+    font-family: $font-vintage;
+    font-weight: normal;
+    color: $accent-color;
+}
+
+h2, h3, .header-text {
+    font-family: $font-header;
+}
+
+p, span, .body-text {
+    font-family: $font-body;
+    line-height: 1.6;
+}

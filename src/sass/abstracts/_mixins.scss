@@ -1,0 +1,60 @@
+// @use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+
+@mixin breakpoint($bp) {
+  @if $bp == tablet {
+    @media (min-width: $bp-tablet) {
+      @content;
+    }
+  }
+
+  @if $bp == tablethorizontal {
+    @media (min-width: $bp-tablet-horizontal) {
+      @content;
+    }
+  }
+
+  @if $bp == desktop {
+    @media (min-width: $bp-desktop) {
+      @content;
+    }
+  }
+
+  @if $bp == desktopxl {
+    @media (min-width: $bp-desktop-xl) {
+      @content;
+    }
+  }
+}
+
+// 4. Mixin para botones estilo "Libro"
+@mixin button-classic {
+  background: transparent;
+  border: $border-thin;
+  color: $color-ink;
+  padding: 10px 20px;
+  font-family: $font-header;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: $transition-smooth;
+
+  &:hover {
+    color: $color-accent;
+    border-color: $color-accent;
+  }
+}
+
+@mixin paper-texture {
+  background-color: $bg-color;
+  background-image: 
+    radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.02) 100%),
+    url("https://www.transparenttextures.com/patterns/p6.png"); // Textura de papel fina
+  background-blend-mode: multiply;}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
