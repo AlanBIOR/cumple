@@ -1,0 +1,131 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.chess-independent-page {
+  @include paper-texture; 
+  background-color: $bg-color; 
+  min-height: 100vh;
+  padding: 0; // Eliminamos padding global para manejarlo internamente
+  overflow-x: hidden;
+
+  .chapter-nav {
+    padding: 1.5rem 1rem; // Reducido en móvil para ganar espacio vertical
+    @include breakpoint(tablet) { padding: 2rem; }
+
+    .back-link {
+      font-family: $font-header;
+      text-decoration: none;
+      color: $color-muted;
+      font-size: 0.85rem;
+      transition: $transition-smooth;
+      &:hover { color: $accent-color; }
+    }
+  }
+
+  .strategy-atmosphere {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 1rem; // Espacio mínimo para que el texto no toque los bordes del cel
+    position: relative;
+
+    @include breakpoint(tablet) { padding: 2rem 1.5rem; }
+
+    // --- COORDENADAS ---
+    .chess-coordinates {
+      display: flex;
+      justify-content: space-between;
+      font-family: $font-vintage;
+      font-size: 0.7rem; // Más pequeño por defecto para mobile
+      color: rgba($ink-color, 0.4);
+      padding: 0.5rem;
+      letter-spacing: 0.1rem;
+      border-top: 1px solid rgba($ink-color, 0.1);
+      border-bottom: 1px solid rgba($ink-color, 0.1);
+
+      @include breakpoint(tablet) {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        letter-spacing: 0.2rem;
+      }
+    }
+
+    .visual-header {
+      margin: 1.5rem 0;
+      text-align: center;
+
+      .technical-sketch {
+        display: inline-block;
+        position: relative;
+
+        .technical-draw {
+          max-width: 150px; // Mobile first
+          width: 100%;
+          mix-blend-mode: multiply;
+          filter: contrast(1.5) grayscale(0.6);
+          opacity: 0.85;
+
+          @include breakpoint(tablet) { max-width: 300px; }
+        }
+      }
+    }
+
+    .letter-fragmented {
+      .chapter-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+
+        .move-notation {
+          font-family: $font-vintage;
+          font-size: 1.2rem;
+          color: $accent-color;
+          opacity: 0.7;
+        }
+
+        .chapter-title {
+          font-family: $font-vintage;
+          font-size: clamp(2.5rem, 10vw, 4.5rem); // Un poco más pequeño en cel
+          line-height: 1;
+        }
+      }
+
+      .annotation {
+        margin-bottom: 3rem;
+        position: relative;
+        padding-left: 1.5rem; // Reducido para ahorrar espacio en cel
+        border-left: 1px solid rgba($accent-color, 0.2);
+
+        @include breakpoint(tablet) { padding-left: 2rem; }
+
+        .note-tag {
+          font-family: $font-vintage;
+          font-size: 1.4rem; // Escalado para mobile
+          @include breakpoint(tablet) { font-size: 1.8rem; }
+          color: $accent-color;
+          margin-bottom: 0.3rem;
+        }
+
+        p {
+          font-family: $font-header;
+          font-size: 1rem; 
+          line-height: 1.5;
+          text-align: justify;
+
+          @include breakpoint(tablet) {
+            font-size: 1.1rem;
+            line-height: 1.6;
+          }
+        }
+
+        &::before {
+          content: '⊕'; // Simbolismo técnico
+          position: absolute;
+          left: -7px;
+          top: 0;
+          background: $bg-color;
+          color: $accent-color;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

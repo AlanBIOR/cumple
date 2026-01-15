@@ -2,10 +2,30 @@
 @use '../abstracts/mixins' as *;
 
 .medicine-independent-page {
-  @include paper-texture; // Tu mixin de papel viejo
+  @include paper-texture; // Textura de papel antiguo
+  background-color: $bg-color; // #EAD8B1
+  min-height: 100vh;
   overflow-x: hidden;
-  
-  // Efecto decorativo de arterias en las esquinas
+  // Reducimos el padding en móvil para ganar espacio horizontal
+  padding: 1rem 0; 
+
+  .chapter-nav {
+    padding: 2rem;
+    .back-link {
+      font-family: $font-header;
+      text-decoration: none;
+      color: $color-muted;
+      font-size: 0.9rem;
+      transition: $transition-smooth;
+      &:hover { color: $accent-color; }
+    }
+  }
+
+  @include breakpoint(tablet) {
+    padding: 1rem;
+  }
+
+  // --- ARTERIAS DECORATIVAS ---
   &::before {
     content: '';
     position: fixed;
@@ -14,26 +34,154 @@
     width: 100%;
     height: 100%;
     background-image: url('/src/img/arteries-frame.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.3;
-    pointer-events: none; // Para que no estorbe al hacer clic
+    background-size: cover; // Cambiado a cover para que llene la pantalla del móvil
+    background-position: center;
+    opacity: 0.15; // Menos opacidad en móvil para no ensuciar el texto
+    pointer-events: none;
     z-index: 1;
   }
 
-  .floating-heart {
-    max-width: 200px;
-    display: block;
-    margin: 2rem auto;
-    filter: drop-shadow(0 0 15px rgba($accent-color, 0.2));
-    animation: heartbeat 1.5s infinite ease-in-out;
+  .treaty-layout {
+    width: 92%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+
+    // --- ENCABEZADO "TRATADO" MÓVIL ---
+    .treaty-header {
+      margin-bottom: 1.5rem;
+      .ornamental-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem; // Gap reducido en móvil
+        border-top: 1px solid $ink-color;
+        border-bottom: 1px solid $ink-color;
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        padding: 0.2rem 0;
+
+        .chapter-title {
+          font-family: $font-vintage;
+          // Tamaño fluido: más pequeño en móvil, crece en desktop
+          font-size: clamp(2rem, 10vw, 3.5rem); 
+          text-transform: lowercase;
+          color: $accent-color;
+          margin: 0;
+        }
+
+        .symbol {
+          font-size: 1.2rem;
+          opacity: 0.6;
+        }
+      }
+    }
+
+    // --- CORAZÓN RESPONSIVE ---
+    .visual-element {
+      .floating-heart {
+        max-width: 140px; // Más pequeño en móvil
+        width: 100%;
+        margin: 0 auto;
+        mix-blend-mode: multiply; // Integración con el fondo
+        filter: drop-shadow(0 0 10px rgba($accent-color, 0.15));
+        animation: heartbeat 1.5s infinite ease-in-out;
+
+        @include breakpoint(tablet) {
+          max-width: 220px;
+        }
+      }
+    }
+
+    // --- CONTENIDO DEL TRATADO ---
+    .treaty-content {
+      padding: 0 0.5rem;
+
+      // Por defecto (móvil) es una sola columna
+      .treaty-row {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+
+        // En desktop activamos las dos columnas
+        /*@include breakpoint(tablet) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          */
+        &::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          height: 100%;
+          width: 1px;
+          background: rgba($ink-color, 0.1);
+        }
+
+        @include breakpoint(tablet) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+          &::after {
+            display: block; // Solo vuelve en pantallas grandes
+            content: '';
+            position: absolute;
+            left: 50%;
+            height: 80%; // No al 100% para que no toque los bordes
+            top: 10%;
+            width: 1px;
+            background: rgba($ink-color, 0.1);
+          }
+        }
+      }
+    }
+
+    .text-block {
+      .entry-subtitle {
+        font-family: $font-vintage;
+        color: $accent-color;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba($ink-color, 0.1);
+      }
+
+      p {
+        font-family: $font-header; // EB Garamond para legibilidad
+        font-size: 1.05rem;
+        line-height: 1.6;
+        text-align: justify;
+        margin: 0;
+        hyphens: auto; // Evita huecos grandes en texto justificado en móvil
+      }
+    }
+
+    // --- SEPARADOR ---
+    .treaty-separator {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      .separator-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent, $ink-color, transparent);
+      }
+      .center-icon {
+        padding: 0 1rem;
+        font-size: 1.2rem;
+        color: $accent-color;
+      }
+    }
   }
 }
 
+// Animación de latido (mantenida de tu código)
 @keyframes heartbeat {
   0% { transform: scale(1); }
-  15% { transform: scale(1.1); }
+  15% { transform: scale(1.08); }
   30% { transform: scale(1); }
-  45% { transform: scale(1.15); }
+  45% { transform: scale(1.12); }
   60% { transform: scale(1); }
 }

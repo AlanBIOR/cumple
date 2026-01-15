@@ -78,7 +78,7 @@
       // Subtítulo Real (H2) - Corrige el problema de traslape
       .entry-subtitle {
         font-family: $font-vintage;
-        font-size: 1.1rem;
+        font-size: 2rem;
         color: $ink-color;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -129,4 +129,49 @@
       }
     }
   }
+}
+
+.bloom-atmosphere {
+  position: relative;
+  overflow: hidden; // Evita que los pétalos creen scroll horizontal
+}
+
+.petal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // Permite que Kris pueda hacer clic en el texto debajo
+  z-index: 1;
+}
+
+// Estilo base del pétalo
+.petal {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, #E58A8A 0%, #C04A4A 60%, #7A1F1F 100%);
+  border: 1px solid rgba(#7A1F1F, 0.3);
+  border-radius: 150% 0 150% 0;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 5px rgba(122, 31, 31, 0.2));
+  z-index: 1;
+  pointer-events: none;
+
+  &.is-background {
+    z-index: -1; // Se coloca detrás del contenido
+    filter: blur(1px) brightness(0.9); // Un poco de desenfoque para dar profundidad
+    opacity: 0.5; // Más transparentes para no distraer
+  }
+}
+
+// Animación de caída
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+// Animación de vaivén (Sway)
+@keyframes sway {
+  0%, 100% { margin-left: 0; }
+  50% { margin-left: 50px; }
 }

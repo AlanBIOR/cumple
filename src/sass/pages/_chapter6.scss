@@ -1,0 +1,164 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.puzzles-independent-page {
+  // NOTA: Quitamos el mixin de textura de papel del body, 
+  // porque queremos ver la imagen del gato limpia de fondo.
+  // @include paper-texture; 
+  
+  // --- FONDO DE PANTALLA COMPLETA NÍTIDO ---
+  background-color: $bg-color; // Color base por si tarda en cargar la imagen
+  background-image: url(../../img/gato-puzzle.png); // Tu imagen
+  background-size: cover; // Cubre toda la pantalla sin deformarse
+  background-position: center center;
+  background-attachment: fixed; // La imagen se queda quieta mientras haces scroll (efecto elegante)
+  background-repeat: no-repeat;
+  
+  min-height: 100vh;
+  padding: 1rem 0;
+  overflow-x: hidden;
+
+  .chapter-nav {
+    padding: 1.5rem 1rem; // Reducido en móvil para ganar espacio vertical
+    @include breakpoint(tablet) { padding: 2rem; }
+
+    .back-link {
+      @include floating-paper-piece();
+      font-family: $font-header;
+      text-decoration: none;
+      color: $ink-color;
+      font-size: 0.85rem;
+      transition: $transition-smooth;
+      padding: 5px 25px;
+      &:hover { color: $accent-color; }
+    }
+  }
+
+  .puzzle-handbook {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 1.5rem;
+
+    // --- ENCABEZADO ---
+    .handbook-header {
+      @include floating-paper-piece();
+      text-align: center;
+      margin-bottom: 4rem;
+      
+      .page-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: $font-vintage;
+        font-size: 1rem;
+        color: $ink-color;
+        border-bottom: 1px solid rgba($ink-color, 0.3);
+        padding-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .chapter-title {
+        font-family: $font-vintage;
+        font-size: clamp(3rem, 10vw, 5rem);
+        margin: 1.5rem 0 1rem;
+        color: $ink-color;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      }
+
+      .decorative-separator {
+        justify-content: center;
+        margin-top: 1.5rem;
+        img {
+            width: 140px; // Ajustado el tamaño del gato pixel
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
+        }
+      }
+    }
+
+    // --- LA IMAGEN CENTRAL (OPCIONAL) ---
+    // Si ya tienes el fondo gigante, quizás esta sección sobre. 
+    // Pero si la dejas, la estilizamos para que resalte.
+    .visual-header {
+      margin-bottom: 4rem;
+      .puzzle-frame {
+        @include floating-paper-piece(); // También la enmarcamos como una pieza sólida
+        padding: 15px;
+        border: 3px solid rgba($ink-color, 0.4);
+        background-color: rgba(white, 0.9); // Un poco más blanco para resaltar la imagen
+
+        .main-illustration {
+          width: 100%;
+          max-width: 400px;
+          display: block;
+          margin: 0 auto;
+          // Quitamos el mix-blend-mode para que la imagen se vea con sus colores reales
+          // mix-blend-mode: multiply; 
+          filter: contrast(1.1);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+      }
+    }
+
+    // --- GRID DE PASOS/PIEZAS ---
+    .puzzle-grid {
+      display: grid;
+      gap: 3rem;
+
+      @include breakpoint(tablet) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .puzzle-step {
+        @include floating-paper-piece(); // Aplica el estilo de hoja flotante
+        position: relative;
+
+        .step-tag {
+          font-family: $font-vintage;
+          font-size: 1.5rem;
+          color: $accent-color;
+          display: block;
+          margin-bottom: 0.8rem;
+          text-transform: uppercase;
+          border-bottom: 2px solid rgba($accent-color, 0.3);
+          padding-bottom: 0.5rem;
+        }
+
+        p {
+          font-family: $font-header;
+          font-size: 1.15rem;
+          line-height: 1.7;
+          text-align: justify;
+          color: $ink-color; // Color oscuro sólido para máxima legibilidad
+        }
+      }
+    }
+
+    .handbook-footer {
+      margin-top: 5rem;
+      text-align: center;
+      @include floating-paper-piece();
+      padding: 1.5rem;
+      font-family: $font-body;
+      font-style: italic;
+      color: $ink-color;
+    }
+  }
+}
+
+// --- RESPONSIVE PARA PHONE ---
+@include breakpoint(mobile) {
+  .puzzles-independent-page {
+    padding: 0.5rem 0;
+    .puzzle-handbook {
+      padding: 1rem;
+      
+      .handbook-header, .puzzle-step, .handbook-footer {
+        padding: 1.5rem; // Un poco menos de padding en móvil
+        // Aumentamos la opacidad en móvil para asegurar lectura bajo el sol, etc.
+        background-color: rgba($bg-color, 0.98); 
+      }
+      
+      .handbook-header .chapter-title { font-size: 3rem; }
+    }
+  }
+}

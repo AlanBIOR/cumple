@@ -1,8 +1,11 @@
 // main.js
-import './sass/style.scss'; // Importa tu archivo SASS principal aquí
-import { initCalendar } from './js/calendar.js'; // Importaremos la lógica desde otro archivo
+import './sass/style.scss'; 
+import { initCalendar } from './js/calendar.js'; 
+import { initPetals } from './js/pelatos.js'; // Corregido el nombre y la ruta
+import { initButterflies } from './js/mariposas.js';
 
-// Arrancamos la aplicación
 document.addEventListener('DOMContentLoaded', () => {
-    initCalendar();
+    initCalendar(); // Carga el calendario si estás en el index
+    initPetals();   // Carga los pétalos si estás en el Capítulo I
+    initButterflies();
 });

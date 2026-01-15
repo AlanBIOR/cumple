@@ -107,3 +107,64 @@
     }
   }
 }
+
+// src/sass/pages/_chapter2.scss
+/*
+.butterfly-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none; // No interfiere con la lectura
+  z-index: 10;
+  overflow: hidden;
+}
+
+.butterfly-ink {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply; // Integra el dibujo con el papel
+  opacity: 0.8;
+  transform: rotate(90deg); 
+  transform-origin: center center;
+  
+  // Animación de vuelo (lenta) y aleteo (rápida)
+  animation: 
+    butterfly-path linear forwards, 
+    butterfly-flap-cycle 0.4s infinite ease-in-out;
+}
+
+// ANIMACIÓN DE 4 FRAMES (Ciclo completo de alas)
+@keyframes butterfly-flap-cycle {
+  0%, 100% { 
+    background-image: url('../../img/mariposa-abierta.png'); 
+    transform: scale(1);
+  }
+  20%, 80% { 
+    background-image: url('../../img/mariposa-media-1.png'); 
+  }
+  40%, 60% { 
+    background-image: url('../../img/mariposa-media-2.png'); 
+  }
+  50% { 
+    background-image: url('../../img/mariposa-cerrada.png'); 
+    transform: scale(0.9) translateY(-2px); // Simula el impulso hacia arriba
+  }
+}
+
+// TRAYECTORIA DE VUELO ERRÁTICA
+@keyframes butterfly-path {
+  0% {
+    left: -10%;
+    top: var(--y-start);
+  }
+  30% { transform: translateY(-40px) rotate(-5deg); }
+  60% { transform: translateY(30px) rotate(5deg); }
+  100% {
+    left: 110%;
+    top: var(--y-start);
+  }
+}
+
+*/
