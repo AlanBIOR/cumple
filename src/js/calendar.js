@@ -1,119 +1,94 @@
-// Contenido del calendario
-const daysContent = {
-    22: { 
-        title: "Día I: El Diagnóstico", 
-        text: "Doctora, el diagnóstico es claro: un exceso de cardio y lecturas profundas. Prescripción para hoy: 15 minutos de baile libre para soltar el cuerpo y un smoothie de frutos rojos. Es el primer paso de estos 19.",
-        img: "/assets/img/flor1.png" // Agregué coma antes y extensión .png
-    },
-    23: { 
-        title: "Día II: El Hallazgo", 
-        text: "Como escribía Sabato: 'Todo era imprevisto, nada se podía pronosticar'. Hoy el azar dice que te detengas en la página 19 de tu libro actual y encuentres una palabra que te defina. Esa es mi recomendación literaria de hoy.",
-        img: "/assets/img/flor2.png"
-    },
-    24: { 
-        title: "Día III: Signos Vitales", 
-        text: "Tu pulso no miente, está en clave morse pidiendo un descanso. Hoy la receta médica es simple: Mate o café, un rompecabezas a medio armar y cero distracciones. Tus signos vitales agradecen este momento.",
-        img: "/assets/img/flor3.png"
-    },
-    25: { 
-        title: "Día IV: Sístole y Diástole", 
-        text: "El corazón tiene un ritmo que la razón no entiende. Hoy toca cardio, pero del que se siente en la pista. Dale 'play' a esa canción que te hace mover los pies sin pensar. El movimiento es medicina.",
-        img: "/assets/img/flor4.png"
-    },
-    26: { 
-        title: "Día V: El Gambito de la Reina", 
-        text: "En el tablero, como en la vida, cada movimiento cuenta. Estás aprendiendo rápido y ya manejas las blancas con elegancia. El reto de hoy: ¿Cómo harías jaque en tres movimientos con tu pieza favorita? El premio es un detalle que te espera en el mundo real.",
-        img: "/assets/img/flor5.png"
-    },
-    27: { 
-        title: "Día VI: Anatomía del Recuerdo", 
-        text: "Armar un rompecabezas es como reconstruir la memoria. Cada pieza encaja solo cuando es el momento justo. Mira la foto que te enviaré hoy; es una pieza fundamental de lo que hemos construido juntos. Solo falta una para completar el cuadro.",
-        img: "/assets/img/flor6.png"
-    },
-    28: { 
-        title: "Día VII: La Historia Completa", 
-        text: "Capítulo Final: 19 años. No son solo latidos, es la banda sonora de tu propia historia. Has llegado al 28 de enero. Hoy no hay prescripciones, solo una celebración de que existes. Tu regalo principal te espera donde guardas tus libros favoritos. ¡Feliz cumpleaños!",
-        img: "/assets/img/flor7.png"
-    }
-};
+export function initChapterUnlock() {
+    // 1. LIMPIEZA AUTOMÁTICA (Para que siempre salga al recargar)
+    localStorage.clear(); 
 
-export function initCalendar() {
-    const currentDay = new Date().getDate();
-    const currentMonth = new Date().getMonth(); // 0 es Enero
-    const cards = document.querySelectorAll('.day-card');
+    const modal = document.getElementById('unlock-modal');
+    const closeBtn = document.querySelector('.close-modal-btn');
+    const chapters = document.querySelectorAll('.chapter-node');
 
-    cards.forEach(card => {
-        const day = parseInt(card.getAttribute('data-day'));
+    if (!modal || !closeBtn) return;
 
-        // Lógica de desbloqueo (Enero es mes 0)
-        if (currentMonth === 0 && currentDay >= day) {
-            card.classList.remove('locked');
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth(); // 0 = Enero
+
+    chapters.forEach((chapter, index) => {
+        // dayToUnlock será 15, 16, 17... (para tus pruebas de hoy)
+        const dayToUnlock = 22 + index; 
+        const onclickAttr = chapter.getAttribute('onclick');
+        if (!onclickAttr) return;
+
+        const urlMatch = onclickAttr.match(/['"](.*?)['"]/);
+        const chapterUrl = urlMatch ? urlMatch[1] : "#";
+        const chapterTitle = chapter.querySelector('.node-title')?.innerText || "este capítulo";
+
+        chapter.removeAttribute('onclick');
+
+        const isPast = (currentMonth === 0 && currentDay > dayToUnlock) || currentMonth > 0;
+        const isToday = (currentMonth === 0 && currentDay === dayToUnlock);
+
+        if (isPast || isToday) {
+            chapter.classList.add('is-unlocked');
+            chapter.classList.remove('is-locked');
             
-            // Llamamos a la función para que el ramo aparezca si el día ya pasó
-            addFlowerToBouquet(day); 
+            chapter.addEventListener('click', () => {
+                // Gracias al localStorage.clear() de arriba, esto siempre entrará aquí si es el día actual
+                if (isToday && !localStorage.getItem(`opened_cap_${dayToUnlock}`)) {
+                    handleFirstUnlock(dayToUnlock, chapterTitle, chapterUrl);
+                } else {
+                    window.location.href = chapterUrl; 
+                }
+            });
+        } else {
+            chapter.classList.add('is-locked');
+            chapter.classList.remove('is-unlocked');
+            
+            chapter.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Resetear botón para capítulos cerrados
+                closeBtn.innerText = "Entendido";
+                closeBtn.onclick = () => modal.classList.remove('active');
 
-            card.addEventListener('click', () => {
-                showModal(daysContent[day]);
+                showPopup(
+                    "Ten paciencia...", 
+                    `Este capítulo se revelará el ${dayToUnlock} de enero. ¡Ya falta muy poco!`
+                );
             });
         }
     });
-
-    setupModal(); // Solo se llama una vez para configurar los eventos de cierre
 }
 
-function showModal(content) {
-    const modal = document.getElementById('content-modal');
-    const modalBody = document.getElementById('modal-body');
+function showPopup(title, text) {
+    const modal = document.getElementById('unlock-modal');
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-text').innerText = text;
+    modal.classList.add('active');
+}
+
+function handleFirstUnlock(day, title, url) {
+    const modal = document.getElementById('unlock-modal');
+    const key = document.querySelector('.modal-key');
+    const closeBtn = document.querySelector('.close-modal-btn');
     
-    // Generamos el HTML dinámico dentro del modal
-    let html = `
-        <h2 class="vintage-title">${content.title}</h2>
-        <img src="${content.img}" class="modal-flower-illustration" alt="Ilustración botánica">
-        <div class="divider"></div>
-        <p class="body-text">${content.text}</p>
-    `;
+    // --- LÓGICA DE MENSAJE PERSONALIZADO ---
+    // Calculamos cuánto falta para el 28 de enero
+    const birthday = 28;
+    const daysLeft = birthday - day;
 
-    // Botón especial para el día del baile
-    if (content.title.includes("Sístole")) {
-        html += `<button class="button-classic" onclick="window.open('URL_DE_TU_CANCION')">Escuchar Ritmo</button>`;
+    let message = "";
+    if (daysLeft > 0) {
+        message = `Faltan ${daysLeft} días para tu cumpleaños. El capítulo "${title}" se ha abierto para ti. Haz clic en continuar para entrar.`;
+    } else {
+        message = `¡Hoy es tu cumpleaños! El capítulo final "${title}" se ha abierto para ti. Haz clic en continuar para entrar.`;
     }
 
-    // Imagen especial para el reto de ajedrez
-    if (content.title.includes("Gambito")) {
-        html += `<img src="/assets/img/tablero-ajedrez.png" class="modal-img" alt="Reto de ajedrez">`;
-    }
-
-    modalBody.innerHTML = html;
-    modal.classList.add('is-open');
-}
-
-function setupModal() {
-    const modal = document.getElementById('content-modal');
-    const closeBtn = document.querySelector('.close-modal');
+    showPopup("¡Desbloqueado!", message);
     
-    // El botón de cerrar quita la clase 'is-open'
-    closeBtn?.addEventListener('click', () => {
-        modal.classList.remove('is-open');
-    });
-
-    // Cerrar al hacer clic en el fondo oscuro
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('is-open');
-        }
-    });
-}
-
-function addFlowerToBouquet(day) {
-    const vase = document.getElementById('vase');
-    if (!vase) return; // Seguridad por si el elemento no existe
-
-    // Evitamos duplicar flores si ya están en el jarrón
-    if (!document.querySelector(`.flower-${day}`)) {
-        const flowerImg = document.createElement('img');
-        flowerImg.className = `flower flower-${day}`;
-        flowerImg.src = daysContent[day].img;
-        flowerImg.alt = `Flor del día ${day}`;
-        vase.appendChild(flowerImg);
-    }
+    closeBtn.innerText = "Continuar"; 
+    closeBtn.onclick = () => {
+        window.location.href = url; 
+    };
+    
+    localStorage.setItem(`opened_cap_${day}`, 'true');
+    if (key) key.classList.add('unlock-spin');
 }

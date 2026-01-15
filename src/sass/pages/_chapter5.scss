@@ -129,3 +129,43 @@
     }
   }
 }
+
+// src/sass/pages/_chapter5.scss
+
+.checkmate-atmosphere {
+  position: relative;
+  // Importante: El fondo debe ser relativo para que el tablero absoluto lo cubra
+  background-color: $bg-color; 
+}
+
+.ghost-board-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  // Creamos una cuadrícula de casillas de 80px
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 80px;
+  pointer-events: none; // Permite hacer click en el texto debajo
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.board-square {
+  width: 80px;
+  height: 80px;
+  border: 0.5px solid rgba($ink-color, 0.05); // Bordes casi invisibles
+  transition: background-color 0.8s ease, transform 0.5s ease;
+  
+  // Color base de las casillas oscuras del tablero (muy sutil)
+  &.square-dark {
+    background-color: rgba($ink-color, 0.02);
+  }
+
+  // EFECTO ACTIVO: Cuando el mouse está cerca
+  &.is-active {
+    background-color: rgba(112, 72, 30, 0.4); // Sepia oscuro
+    transform: scale(0.95);
+    transition: background-color 0.1s ease; // Aparece instantáneo
+  }
+}

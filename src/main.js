@@ -1,11 +1,26 @@
 // main.js
 import './sass/style.scss'; 
-import { initCalendar } from './js/calendar.js'; 
-import { initPetals } from './js/pelatos.js'; // Corregido el nombre y la ruta
+import { initChapterUnlock } from './js/calendar.js';
+import { initPetals } from './js/petalos.js';
 import { initButterflies } from './js/mariposas.js';
+import { initBrisa } from './js/brisa.js';
+import { initRain } from './js/lluvia.js'; 
+import { initGhostBoard } from './js/tablero.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCalendar(); // Carga el calendario si estás en el index
-    initPetals();   // Carga los pétalos si estás en el Capítulo I
-    initButterflies();
+    // Función segura para evitar bloqueos
+    const safeRun = (fn) => { 
+        try { 
+            if (typeof fn === 'function') fn(); 
+        } catch(e) { 
+            console.error("Error ejecutando función:", e); 
+        } 
+    };
+
+    safeRun(initPetals); 
+    safeRun(initButterflies);
+    safeRun(initBrisa);
+    safeRun(initRain); 
+    safeRun(initGhostBoard);
+    safeRun(initChapterUnlock); // 👈 Esta es la única que debe quedar para el calendario
 });

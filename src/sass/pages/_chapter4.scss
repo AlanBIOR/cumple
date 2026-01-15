@@ -1,128 +1,395 @@
 @use '../abstracts/variables' as *;
+
 @use '../abstracts/mixins' as *;
 
+
+
 .dancing-independent-page {
+
   @include paper-texture; //
+
   background-color: $bg-color; // #EAD8B1
+
   min-height: 100vh;
+
   padding: 1rem;
+
   color: #2a2a2a;
 
+
+
   .chapter-nav {
+
     padding: 2rem 0;
+
     .back-link {
+
       font-family: $font-header;
+
       text-decoration: none;
+
       color: $color-muted;
+
       font-size: 0.9rem;
+
       transition: $transition-smooth;
+
       &:hover { color: $accent-color; }
+
     }
+
   }
 
+
+
   .rhythmic-atmosphere {
+
     max-width: 1100px;
+
     margin: 0 auto;
+
     position: relative;
 
+
+
     // --- CABECERA ESTILO JUGEND ---
+
     .jugend-header {
+
       border-bottom: 1px solid rgba(0,0,0,0.8);
+
       margin-bottom: 1rem;
+
       .header-meta {
+
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         font-family: $font-vintage;
+
         font-size: 2rem;
+
         text-transform: uppercase;
+
         span{
+
             font-size: 3rem;
+
             font-family: $font-vintage !important;
+
         }
+
       }
+
     }
+
+
 
     // --- CONTENEDOR PRINCIPAL RESPONSIVE ---
+
     .art-nouveau-container {
+
       display: grid;
+
       grid-template-columns: 1fr; // Por defecto móvil: una columna
+
       gap: 2rem;
+
       align-items: center;
 
+
+
       @include breakpoint(tablet) {
+
         grid-template-columns: 1fr 300px 1fr; // Layout de 3 columnas
+
         gap: 1rem;
+
       }
+
     }
+
+
 
     // --- IMAGEN CENTRAL VERTICAL ---
+
     .visual-center {
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       order: -1; // En móvil la imagen va arriba
 
+
+
       @include breakpoint(tablet) {
+
         order: 0; // En desktop vuelve al centro
+
       }
+
+
 
       .central-botanical {
+
         width: 100%;
+
         max-width: 250px;
+
         height: auto;
+
         mix-blend-mode: multiply; // Integra la flor con el papel
+
         filter: contrast(1.1) sepia(0.2);
+
       }
+
+
 
       .ornamental-title {
+
         text-align: center;
+
         margin-top: -30px; // Superposición estilo Jugendstil
+
         background: $bg-color;
+
         padding: 0 1rem;
-        
+
+       
+
         .chapter-title {
+
           font-family: $font-vintage;
+
           font-size: clamp(2.5rem, 8vw, 4rem);
+
           line-height: 0.8;
+
           color: $ink-color;
+
         }
+
       }
+
     }
+
+
 
     // --- COLUMNAS DE TEXTO ---
+
     .text-column {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 2.5rem;
 
+
+
       .text-block p {
+
         font-family: $font-header; // EB Garamond
+
         font-size: 1.05rem;
+
         line-height: 1.6;
+
         text-align: justify;
+
         position: relative;
 
+
+
         // Capitular elegante
+
         &::first-letter {
+
           font-family: $font-vintage;
+
           font-size: 2.5rem;
+
           color: $accent-color;
+
           float: left;
+
           margin-right: 0.5rem;
+
           line-height: 1;
+
         }
+
       }
+
     }
 
+
+
     // --- PIE DE PÁGINA ---
+
     .jugend-footer {
+
       text-align: center;
+
       margin-top: 4rem;
+
       border-top: 1px solid rgba(0,0,0,0.8);
+
       padding: 1rem 0;
+
       font-family: $font-vintage;
+
       font-size: 1.2rem;
+
     }
+
+  }
+}
+
+// src/sass/pages/_chapter4.scss
+
+.dancing-independent-page {
+  // ... (tus estilos anteriores de body y nav se mantienen igual)
+
+  .visual-center {
+    position: relative; // Necesario para las partículas
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">✨</text></svg>'), auto;
+
+    .central-botanical {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      mix-blend-mode: multiply;
+      filter: contrast(1.1) sepia(0.2);
+      
+      // Balanceo sutil constante (Brisa)
+      animation: branch-sway 6s ease-in-out infinite alternate;
+      transition: transform 0.3s ease-out;
+
+      // Reacción al pasar el mouse
+      &:hover {
+        transform: scale(1.05) rotate(2deg);
+      }
+    }
+  }
+}
+
+// Estilo de las partículas mágicas
+.pollen-particle {
+  position: absolute;
+  background: radial-gradient(circle, #D4AF37 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 0 10px #D4AF37;
+  animation: pollen-float 2s ease-out forwards;
+}
+
+// Animación de la rama (Brisa)
+@keyframes branch-sway {
+  0% { transform: rotate(-1deg) translateY(0); }
+  100% { transform: rotate(1deg) translateY(-5px); }
+}
+
+// Animación del polen
+@keyframes pollen-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translate(0, -10px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), -80px) scale(0.5);
+  }
+}
+
+// _falling-flowers.scss
+
+// El contenedor que cubre toda la pantalla
+.falling-flowers-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // Para que no bloquee los clics en la página
+  z-index: 1; // Asegúrate de que esté por encima del fondo pero debajo del texto si es necesario
+  overflow: hidden;
+}
+
+// Estilo de cada flor individual
+.falling-flower {
+  position: absolute;
+  // Usa la ruta donde guardaste tu imagen
+  background-image: url('../../img/flor1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9; // Un poco de transparencia para que se integre mejor
+  will-change: transform, top; // Optimización para el navegador
+
+  // La animación se define aquí, pero su duración y retraso se controlan con JS
+  animation-name: fall-and-sway;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+// Keyframes para la animación de caída y balanceo
+@keyframes fall-and-sway {
+  0% {
+    top: -10%; // Empieza desde arriba, fuera de la pantalla
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    // Se mueve hacia un lado y rota a la mitad del camino
+    transform: translateX(var(--sway-distance)) rotate(180deg);
+  }
+  100% {
+    top: 110%; // Termina abajo, fuera de la pantalla
+    transform: translateX(0) rotate(360deg); // Vuelve al centro y completa la rotación
+  }
+}
+
+// src/sass/pages/_chapter5.scss
+.rain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ink-drop {
+  position: absolute;
+  background-color: rgba($ink-color, 0.4); // Tinta negra traslúcida
+  width: 1px; // Gota muy fina
+  height: 60px; // Gota alargada
+  mix-blend-mode: multiply; // Fusión con el papel
+  animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% {
+    transform: translateY(100vh); // Cae por toda la pantalla
+    opacity: 0;
   }
 }

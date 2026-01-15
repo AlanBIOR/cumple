@@ -65,7 +65,7 @@
               </div>
             </article>
 
-            <article class="chapter-node is-unlocked" onclick="window.location.href='capitulo4.html'">
+            <article class="chapter-node is-locked" onclick="window.location.href='capitulo4.html'">
               <div class="wax-seal"></div>
               <div class="node-background">
                   <span class="bg-number">IV</span>
@@ -79,7 +79,7 @@
               </div>
             </article>
 
-            <article class="chapter-node is-unlocked" onclick="window.location.href='capitulo5.html'">
+            <article class="chapter-node is-locked" onclick="window.location.href='capitulo5.html'">
               <div class="wax-seal"></div>
               <div class="node-background">
                   <span class="bg-number">V</span>
@@ -93,7 +93,7 @@
               </div>
             </article>
 
-            <article class="chapter-node is-unlocked" onclick="window.location.href='capitulo6.html'">
+            <article class="chapter-node is-locked" onclick="window.location.href='capitulo6.html'">
               <div class="wax-seal"></div>
               <div class="node-background">
                   <span class="bg-number">VI</span>
@@ -127,6 +127,17 @@
             <p class="medical-note">Leer un capítulo por día.</p>
         </footer>
 
+    </div>
+
+    <div id="unlock-modal" class="custom-modal">
+        <div class="modal-content">
+            <div class="key-animation-container">
+                <span class="modal-key">🗝️</span>
+            </div>
+            <h3 id="modal-title" class="vintage-title"></h3>
+            <p id="modal-text" class="body-text"></p>
+            <button class="close-modal-btn">Entendido</button>
+        </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>

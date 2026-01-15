@@ -43,3 +43,96 @@
     text-shadow: 1px 1px 2px rgba($ink-color, 0.05);
   }
 }
+
+// ---- Llave ----
+.custom-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px); // Desenfoque ligeramente más fuerte para enfoque
+
+    &.active { 
+        display: flex !important; 
+    }
+
+    .modal-content {
+        background: #f4ecd8; // $bg-color
+        padding: 3rem 2rem;
+        border: 2px solid #8b0000; // $accent-color
+        text-align: center;
+        max-width: 450px;
+        width: 90%;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        
+        // Contenedor Flex para centrado perfecto
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .key-animation-container {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+
+        #modal-title {
+            // Título mucho más grande y con tu fuente vintage
+            font-family: $font-vintage; 
+            font-size: clamp(3.5rem, 10vw, 5rem); 
+            color: #8b0000;
+            margin: 0 0 1.5rem 0;
+            line-height: 0.9;
+            text-transform: none; // Mantiene el estilo de tu captura
+        }
+
+        #modal-text {
+            // Texto del mensaje personalizado
+            font-family: $font-body;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: rgba(0, 0, 0, 0.8);
+            max-width: 90%;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .close-modal-btn {
+            // Estilo del botón "Continuar"
+            background: #8b0000;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 3rem;
+            font-family: $font-header;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0px #5a0000; // Efecto de profundidad
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 0px #5a0000;
+                filter: brightness(1.1);
+            }
+
+            &:active {
+                transform: translateY(2px);
+                box-shadow: 0 0px 0px #5a0000;
+            }
+        }
+    }
+}
+
+// Animación de la llave permaneciendo en su lugar pero girando
+.unlock-spin {
+    animation: keyRotateOpen 1.8s ease-in-out forwards;
+}
+
+@keyframes keyRotateOpen {
+    0% { transform: rotate(0deg) scale(1); }
+    40% { transform: rotate(-45deg) scale(1.3); filter: drop-shadow(0 0 20px gold); }
+    100% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+}

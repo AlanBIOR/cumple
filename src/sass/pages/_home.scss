@@ -1,41 +1,48 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+// --- 1. Estilos Base de la Página ---
 .page-home {
-  background-color: $bg-color; // Color crema de papel antiguo
+  background-color: $bg-color; 
   min-height: 100vh;
   overflow-x: hidden;
+  margin: 0;
 
-  // 2. Encabezado del Tratado
+  // Encabezado del Tratado
   .main-header {
     padding: 0;
     text-align: center;
 
     .castillo-img {
       width: 100%;
-      height: 60vh; // 70% de la altura de la ventana
-      object-fit: cover; // Asegura que la imagen llene el espacio sin deformarse
-      object-position: top center; // Centra la composición del castillo
+      height: 60vh; 
+      object-fit: cover; 
+      object-position: top center; 
       display: block;
       max-width: $bp-desktop-xl;
       margin: 0 auto;
-
       opacity: 0.8;
-      
-      // Opcional: Un desvanecimiento sutil hacia el color de fondo para estilo fantasía
       mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);    }
+      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    
+      @include breakpoint(tablet) {
+        height: 100%;
+        margin-bottom: -200px;
+      }
+    }
     
     .vintage-title {
-      font-family: $font-vintage; // Bigelow Rules
+      font-family: $font-vintage; 
       font-size: clamp(3rem, 10vw, 6rem);
-      color: $accent-color; // Rojo borgoña médico
-      margin-bottom: 0.5rem;
+      color: $accent-color; 
+      margin: 0.5rem 0 0.5rem; 
       letter-spacing: 0.1em;
+      position: relative;
+      z-index: 10;
     }
 
     .subtitle {
-      font-family: $font-header; // EB Garamond
+      font-family: $font-header; 
       font-style: italic;
       color: $color-muted;
       font-size: 2rem;
@@ -43,10 +50,10 @@
     }
   }
 
-  // 3. Contenedor de Capítulos (Niveles)
+  // Contenedor de Capítulos
   .index-container {
     display: flex;
-    flex-direction: column; // Móvil: Una sola columna
+    flex-direction: column; 
     width: 95%;
     max-width: 1400px;
     margin: 2rem auto 5rem;
@@ -54,24 +61,26 @@
     background: rgba($color-bg-alt, 0.5);
 
     @include breakpoint(tablet) {
-      flex-direction: row; // Desktop: Franjas verticales
+      flex-direction: row; 
       height: 70vh;
+      overflow: hidden;
     }
   }
 }
 
-// 4. Los Artículos (Capítulos individuales)
+// --- 2. Los Nodos de los Capítulos (Franjas) ---
 .chapter-node {
   flex: 1;
   position: relative;
   overflow: hidden;
-  border-bottom: $border-thin;
-  transition: $transition-smooth;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.5rem;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              background 0.5s ease;
+  cursor: pointer;
+  border-bottom: $border-thin;
 
   @include breakpoint(tablet) {
     border-bottom: none;
@@ -79,27 +88,51 @@
     &:last-child { border-right: none; }
   }
 
-  // Número gigante de fondo
+  // --- CAPA DE TEXTURA DE FONDO ---
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: multiply; 
+    z-index: 0;
+    transition: opacity 0.5s ease, transform 0.8s ease, filter 0.5s ease;
+  }
+
+  // --- RUTAS DE TEXTURAS ---
+  &:nth-child(1)::before { background-image: url('../../img/book-leather-1.png'); }
+  &:nth-child(2)::before { background-image: url('../../img/book-cloth-2.png'); }
+  &:nth-child(3)::before { background-image: url('../../img/book-parchment-3.png'); }
+  &:nth-child(4)::before { background-image: url('../../img/book-floral-4.png'); }
+  &:nth-child(5)::before { background-image: url('../../img/book-velvet-5.png'); }
+  &:nth-child(6)::before { background-image: url('../../img/book-puzzle-6.png'); }
+  &:nth-child(7)::before { background-image: url('../../img/book-final-7.jpg'); }
+
+  // --- NÚMERO GIGANTE DE FONDO ---
   .node-background {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    pointer-events: none;
 
     .bg-number {
       font-family: $font-vintage;
       font-size: 9rem;
-      color: rgba($color-border, 0.15); // Marca de agua sutil
-      transition: $transition-smooth;
+      color: rgba($color-border, 0.15); 
+      transition: color 0.4s ease, transform 0.4s ease;
     }
   }
 
-  // Contenido de la franja
+  // --- CONTENIDO DE TEXTO ---
   .node-content {
     position: relative;
-    z-index: 2;
-    transition: $transition-smooth;
+    z-index: 5;
+    padding: 1rem;
+    border-radius: 4px;
+    transition: transform 0.4s ease, filter 0.5s ease, opacity 0.5s ease;
 
     .node-title {
       font-family: $font-header;
@@ -109,60 +142,87 @@
     }
 
     .node-description, .pista {
-      font-family: $font-body; // Lora para las pistas
+      font-family: $font-body; 
       font-size: 1rem;
-      color: $color-muted;
+      color: rgb(0, 0, 0, 0.7);
       font-style: italic;
+      font-weight: 600;
     }
   }
 
-  // --- ESTADO BLOQUEADO (Sellos de cera) ---
+  // --- ESTADO: BLOQUEADO (Sello a color, fondo gris) ---
   &.is-locked {
-    background-color: rgba($color-border, 0.05);
-    filter: grayscale(0.5);
     cursor: not-allowed;
+    pointer-events: auto;
 
+    // 1. El fondo y el texto se vuelven grises y opacos
+    &::before { 
+      opacity: 0.2; // Muy opaco
+      filter: grayscale(1) contrast(0.7); // Blanco y negro deslavado
+    }
+    
+    .node-content {
+      opacity: 0.5;
+      filter: grayscale(1); // Texto gris para no competir con el sello
+    }
+
+    .bg-number { opacity: 0.1; }
+
+    // 2. El SELLO mantiene su color vibrante
     .wax-seal {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: $accent-color;
+      width: 70px;
+      height: 70px;
+      background: $accent-color; // Color borgoña original
       border-radius: 50%;
-      box-shadow: 0 4px 10px rgba($accent-color, 0.4);
-      z-index: 3;
+      // Sombra roja para darle relieve y brillo
+      box-shadow: 0 4px 15px rgba($accent-color, 0.5); 
+      z-index: 10;
       display: flex;
       justify-content: center;
       align-items: center;
+      opacity: 1; // Color completo
 
       &::before {
-        content: '℞'; // Símbolo médico
+        content: '🗝️'; // Símbolo médico
         color: white;
         font-family: $font-vintage;
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
     }
   }
 
-  // --- EFECTOS HOVER (Solo desbloqueados) ---
-  &.is-unlocked:hover {
-    flex: 2; // La franja se expande
-    background: rgba($accent-color, 0.02);
-
-    .bg-number {
-      color: rgba($accent-color, 0.1);
-      transform: translate(-50%, -50%) scale(1.1);
+  // --- ESTADO: DESBLOQUEADO (Colorido y vibrante) ---
+  &.is-unlocked {
+    &::before {
+      opacity: 0.4; // Textura más visible
+      filter: saturate(1.2); // Más colorido y vibrante
     }
 
-    .node-title { color: $accent-color; }
-  }
-}
+    .wax-seal { display: none; } // Ocultar sello
 
-// 5. Animación de rebote para la flecha
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+    // Efectos HOVER exclusivos
+    &:hover {
+      flex: 2; // Expansión suave
+      background: rgba($accent-color, 0.05);
+
+      &::before {
+        opacity: 0.6; // Aún más vibrante al pasar el mouse
+        transform: scale(1.05);
+      }
+
+      .bg-number {
+        color: rgba($accent-color, 0.12);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      .node-title { 
+        color: $accent-color; 
+        transform: translateY(-5px);
+      }
+    }
+  }
 }
