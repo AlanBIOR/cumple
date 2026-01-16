@@ -14,7 +14,7 @@ export function initChapterUnlock() {
 
     chapters.forEach((chapter, index) => {
         // dayToUnlock será 15, 16, 17... (para tus pruebas de hoy)
-        const dayToUnlock = 22 + index; 
+        const dayToUnlock = 9 + index; 
         const onclickAttr = chapter.getAttribute('onclick');
         if (!onclickAttr) return;
 
@@ -72,7 +72,7 @@ function handleFirstUnlock(day, title, url) {
     
     // --- LÓGICA DE MENSAJE PERSONALIZADO ---
     // Calculamos cuánto falta para el 28 de enero
-    const birthday = 28;
+    const birthday = 15; // 28
     const daysLeft = birthday - day;
 
     let message = "";
