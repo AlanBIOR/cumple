@@ -891,14 +891,14 @@ body, html, #app {
 
 @keyframes butterfly-flap-cycle {
   0%, 100% {
-    background-image: url("../../img/mariposa-cerrada-new.png");
+    background-image: url("../img/mariposa-cerrada-new.png");
     transform: scale(1);
   }
   25%, 75% {
-    background-image: url("../../img/mariposa-media.png");
+    background-image: url("../img/mariposa-media.png");
   }
   50% {
-    background-image: url("../../img/mariposa-cerrada-new.png");
+    background-image: url("../img/mariposa-cerrada-new.png");
     transform: scale(0.9) translateY(-2px);
   }
 }
