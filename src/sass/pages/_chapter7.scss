@@ -60,11 +60,13 @@
     .content-block {
         max-width: 1200px;
         margin: 5rem auto;
-        display: grid;
+        display: flex;
+        flex-direction: column-reverse; // Esto invierte el orden: el primer div baja y el segundo sube.
         gap: 4rem;
         padding: 0 2rem;
 
         @include breakpoint(tablet) {
+            display: grid;
             grid-template-columns: 1fr 1.2fr;
             align-items: center;
         }
@@ -85,6 +87,7 @@
             color: #333;
             margin-bottom: 1.5rem;
         }
+
     }
 
     // --- EFECTO DE IMAGEN DESGARRADA (COMO EL EJEMPLO) ---
@@ -96,12 +99,16 @@
             width: 100%;
             height: auto;
             display: block;
+            scale: 1.1;
             // Aquí usamos una máscara para imitar el borde de pintura
-            mask-image: url('/src/img/brush-mask.png'); 
-            -webkit-mask-image: url('/src/img/brush-mask.png');
+            mask-image: url('../../img/webkit-mask-2.png'); 
             mask-size: contain;
             mask-repeat: no-repeat;
             mask-position: center;
+
+            @include breakpoint(tablet){
+            scale: 1.5;
+            }
         }
     }
 
@@ -112,7 +119,7 @@
         padding: 10rem 2rem;
         text-align: center;
         background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), 
-                    url('/src/img/textura-atmosferica.jpg') center/cover;
+                    url('./src/img/textura-atmosferica.jpg') center/cover;
 
         .letter-overlay {
             max-width: 800px;

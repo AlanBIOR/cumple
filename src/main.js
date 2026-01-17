@@ -1,5 +1,5 @@
 // main.js
-import './sass/style.scss'; 
+import './css/style.css'; 
 import { initChapterUnlock } from './js/calendar.js';
 import { initPetals } from './js/petalos.js';
 import { initButterflies } from './js/mariposas.js';

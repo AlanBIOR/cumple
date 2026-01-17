@@ -1,0 +1,1610 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1, .vintage-title {
+  font-family: "Bigelow Rules", serif;
+  font-weight: normal;
+  color: #a62626;
+}
+
+h2, h3, .header-text {
+  font-family: "EB Garamond", serif;
+}
+
+p, span, .body-text {
+  font-family: "Lora", serif;
+  line-height: 1.6;
+}
+
+body, html, #app {
+  background-color: #EAD8B1;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.main-header {
+  background-color: #EAD8B1;
+}
+
+.main-footer {
+  width: 100%;
+  padding: 2rem 0;
+  text-align: center;
+  position: relative;
+}
+.main-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(166, 38, 38, 0.4), transparent);
+}
+.main-footer .medical-note {
+  font-family: "EB Garamond", serif;
+  color: #6e6b64;
+  font-style: italic;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  display: inline-block;
+}
+.main-footer .medical-note::before {
+  content: "℞";
+  font-family: "Bigelow Rules", serif;
+  color: #a62626;
+  font-size: 1.8rem;
+  vertical-align: middle;
+  margin-right: 0.8rem;
+  font-style: normal;
+  opacity: 0.8;
+}
+.main-footer .medical-note {
+  text-shadow: 1px 1px 2px rgba(26, 26, 26, 0.05);
+}
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+.custom-modal.active {
+  display: flex !important;
+}
+.custom-modal .modal-content {
+  background: #f4ecd8;
+  padding: 3rem 2rem;
+  border: 2px solid #8b0000;
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.custom-modal .modal-content .key-animation-container {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+}
+.custom-modal .modal-content #modal-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(3.5rem, 10vw, 5rem);
+  color: #8b0000;
+  margin: 0 0 1.5rem 0;
+  line-height: 0.9;
+  text-transform: none;
+}
+.custom-modal .modal-content #modal-text {
+  font-family: "Lora", serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 90%;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}
+.custom-modal .modal-content .close-modal-btn {
+  background: #8b0000;
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 3rem;
+  font-family: "EB Garamond", serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0px #5a0000;
+}
+.custom-modal .modal-content .close-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0px #5a0000;
+  filter: brightness(1.1);
+}
+.custom-modal .modal-content .close-modal-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0px 0px #5a0000;
+}
+
+.unlock-spin {
+  animation: keyRotateOpen 1.8s ease-in-out forwards;
+}
+
+@keyframes keyRotateOpen {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(-45deg) scale(1.3);
+    filter: drop-shadow(0 0 20px gold);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.8;
+  }
+}
+.main-header {
+  text-align: center;
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+}
+.main-header h1 {
+  font-size: 4.5rem;
+  margin: 0;
+}
+.main-header .subtitle {
+  font-family: "EB Garamond", serif;
+  font-style: italic;
+  color: #6e6b64;
+}
+
+.page-home {
+  background-color: #EAD8B1;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+}
+.page-home .main-header {
+  padding: 0;
+  text-align: center;
+}
+.page-home .main-header .castillo-img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  max-width: 1440px;
+  margin: 0 auto;
+  opacity: 0.8;
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+@media (min-width: 768px) {
+  .page-home .main-header .castillo-img {
+    height: 100%;
+    margin-bottom: -200px;
+  }
+}
+.page-home .main-header .vintage-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: #a62626;
+  margin: 0.5rem 0 0.5rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 10;
+}
+.page-home .main-header .subtitle {
+  font-family: "EB Garamond", serif;
+  font-style: italic;
+  color: #6e6b64;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+.page-home .index-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  max-width: 1400px;
+  margin: 2rem auto 5rem;
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  background: rgba(236, 232, 223, 0.5);
+}
+@media (min-width: 768px) {
+  .page-home .index-container {
+    flex-direction: row;
+    height: 70vh;
+    overflow: hidden;
+  }
+}
+
+.chapter-node {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.3);
+}
+@media (min-width: 768px) {
+  .chapter-node {
+    border-bottom: none;
+    border-right: 1px solid rgba(26, 26, 26, 0.3);
+  }
+  .chapter-node:last-child {
+    border-right: none;
+  }
+}
+.chapter-node::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  transition: opacity 0.5s ease, transform 0.8s ease, filter 0.5s ease;
+}
+.chapter-node:nth-child(1)::before {
+  background-image: url("../img/book-leather-1.png");
+}
+.chapter-node:nth-child(2)::before {
+  background-image: url("../img/book-cloth-2.png");
+}
+.chapter-node:nth-child(3)::before {
+  background-image: url("../img/book-parchment-3.png");
+}
+.chapter-node:nth-child(4)::before {
+  background-image: url("../img/book-floral-4.png");
+}
+.chapter-node:nth-child(5)::before {
+  background-image: url("../img/book-velvet-5.png");
+}
+.chapter-node:nth-child(6)::before {
+  background-image: url("../img/book-puzzle-6.png");
+}
+.chapter-node:nth-child(7)::before {
+  background-image: url("../img/book-final-7.png");
+}
+.chapter-node .node-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+.chapter-node .node-background .bg-number {
+  font-family: "Bigelow Rules", serif;
+  font-size: 9rem;
+  color: rgba(125, 116, 97, 0.15);
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+.chapter-node .node-content {
+  position: relative;
+  z-index: 5;
+  padding: 1rem;
+  border-radius: 4px;
+  transition: transform 0.4s ease, filter 0.5s ease, opacity 0.5s ease;
+}
+.chapter-node .node-content .node-title {
+  font-family: "EB Garamond", serif;
+  font-size: 1.8rem;
+  color: #1A1A1A;
+  margin: 0.5rem 0;
+}
+.chapter-node .node-content .node-description, .chapter-node .node-content .pista {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-style: italic;
+  font-weight: 600;
+}
+.chapter-node.is-locked {
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+.chapter-node.is-locked::before {
+  opacity: 0.2;
+  filter: grayscale(1) contrast(0.7);
+}
+.chapter-node.is-locked .node-content {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+.chapter-node.is-locked .bg-number {
+  opacity: 0.1;
+}
+.chapter-node.is-locked .wax-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background: #a62626;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(166, 38, 38, 0.5);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+.chapter-node.is-locked .wax-seal::before {
+  content: "🗝️";
+  color: white;
+  font-family: "Bigelow Rules", serif;
+  font-size: 2rem;
+}
+.chapter-node.is-unlocked::before {
+  opacity: 0.4;
+  filter: saturate(1.2);
+}
+.chapter-node.is-unlocked .wax-seal {
+  display: none;
+}
+.chapter-node.is-unlocked:hover {
+  flex: 2;
+  background: rgba(166, 38, 38, 0.05);
+}
+.chapter-node.is-unlocked:hover::before {
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+.chapter-node.is-unlocked:hover .bg-number {
+  color: rgba(166, 38, 38, 0.12);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.chapter-node.is-unlocked:hover .node-title {
+  color: #a62626;
+  transform: translateY(-5px);
+}
+
+.medicine-independent-page {
+  background-color: #EAD8B1;
+  background-image: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%), url("https://www.transparenttextures.com/patterns/p6.png");
+  background-blend-mode: multiply;
+  background-color: #EAD8B1;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 1rem 0;
+}
+.medicine-independent-page .chapter-nav {
+  padding: 2rem;
+}
+.medicine-independent-page .chapter-nav .back-link {
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #6e6b64;
+  font-size: 0.9rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.medicine-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+@media (min-width: 768px) {
+  .medicine-independent-page {
+    padding: 1rem;
+  }
+}
+.medicine-independent-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("src/img/arteries-frame.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1;
+}
+.medicine-independent-page .treaty-layout {
+  width: 92%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.medicine-independent-page .treaty-layout .treaty-header {
+  margin-bottom: 1.5rem;
+}
+.medicine-independent-page .treaty-layout .treaty-header .ornamental-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-top: 1px solid #1A1A1A;
+  border-bottom: 1px solid #1A1A1A;
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  padding: 0.2rem 0;
+}
+.medicine-independent-page .treaty-layout .treaty-header .ornamental-title .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(2rem, 10vw, 3.5rem);
+  color: #a62626;
+  margin: 0;
+}
+.medicine-independent-page .treaty-layout .treaty-header .ornamental-title .symbol {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+.medicine-independent-page .treaty-layout .visual-element .floating-heart {
+  max-width: 140px;
+  width: 100%;
+  margin: 0 auto;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 0 10px rgba(166, 38, 38, 0.15));
+  animation: heartbeat 1.5s infinite ease-in-out;
+}
+@media (min-width: 768px) {
+  .medicine-independent-page .treaty-layout .visual-element .floating-heart {
+    max-width: 220px;
+  }
+}
+.medicine-independent-page .treaty-layout .treaty-content {
+  padding: 0 0.5rem;
+}
+.medicine-independent-page .treaty-layout .treaty-content .treaty-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  /*@include breakpoint(tablet) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    */
+}
+.medicine-independent-page .treaty-layout .treaty-content .treaty-row::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  width: 1px;
+  background: rgba(26, 26, 26, 0.1);
+}
+@media (min-width: 768px) {
+  .medicine-independent-page .treaty-layout .treaty-content .treaty-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .medicine-independent-page .treaty-layout .treaty-content .treaty-row::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 80%;
+    top: 10%;
+    width: 1px;
+    background: rgba(26, 26, 26, 0.1);
+  }
+}
+.medicine-independent-page .treaty-layout .text-block .entry-subtitle {
+  font-family: "Bigelow Rules", serif;
+  color: #a62626;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+.medicine-independent-page .treaty-layout .text-block p {
+  font-family: "EB Garamond", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: justify;
+  margin: 0;
+  hyphens: auto;
+}
+.medicine-independent-page .treaty-layout .treaty-separator {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+.medicine-independent-page .treaty-layout .treaty-separator .separator-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #1A1A1A, transparent);
+}
+.medicine-independent-page .treaty-layout .treaty-separator .center-icon {
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #a62626;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.08);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+.cardio-independent-page {
+  background-color: #EAD8B1;
+  color: #1A1A1A;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+.cardio-independent-page .chapter-nav {
+  padding: 2rem;
+}
+.cardio-independent-page .chapter-nav .back-link {
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #6e6b64;
+  font-size: 0.9rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.cardio-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+.cardio-independent-page .chapter-manuscript {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.cardio-independent-page .chapter-manuscript .visual-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.cardio-independent-page .chapter-manuscript .visual-header .chapter-illustration {
+  max-width: 280px;
+  height: auto;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  margin: 0 auto;
+}
+.cardio-independent-page .chapter-manuscript .title-section {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.cardio-independent-page .chapter-manuscript .title-section .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  color: #1A1A1A;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+.cardio-independent-page .chapter-manuscript .title-section .red-divider {
+  color: #a62626;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-grid {
+  display: grid;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .cardio-independent-page .chapter-manuscript .bestiary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem 3rem;
+  }
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-subtitle {
+  font-family: "Bigelow Rules", serif;
+  font-size: 2rem;
+  color: #1A1A1A;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  opacity: 0.9;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content {
+  position: relative;
+  padding: 0 2.5rem;
+  width: 100%;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content::before, .cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  font-family: "EB Garamond", serif;
+  font-size: 5rem;
+  font-weight: 100;
+  color: rgba(26, 26, 26, 0.8);
+  display: flex;
+  align-items: center;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content::before {
+  content: "{";
+  left: 0;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content::after {
+  content: "}";
+  right: 0;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content p {
+  font-family: "Lora", serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-align: justify;
+  margin: 0;
+}
+.cardio-independent-page .chapter-manuscript .bestiary-entry .entry-content p::first-letter {
+  font-family: "EB Garamond", serif;
+  font-size: 2.5rem;
+  color: #a62626;
+  float: left;
+  margin-right: 0.5rem;
+  line-height: 1;
+}
+
+.bloom-atmosphere {
+  position: relative;
+  overflow: hidden;
+}
+
+.petal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, #E58A8A 0%, #C04A4A 60%, #7A1F1F 100%);
+  border: 1px solid rgba(122, 31, 31, 0.3);
+  border-radius: 150% 0 150% 0;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 5px rgba(122, 31, 31, 0.2));
+  z-index: 1;
+  pointer-events: none;
+}
+.petal.is-background {
+  z-index: -1;
+  filter: blur(1px) brightness(0.9);
+  opacity: 0.5;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+@keyframes sway {
+  0%, 100% {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: 50px;
+  }
+}
+.reading-independent-page {
+  position: relative;
+  background-color: #EAD8B1;
+  color: #2a2a2a;
+  min-height: 100vh;
+  padding: 2rem;
+}
+.reading-independent-page .chapter-nav {
+  padding: 2rem;
+}
+.reading-independent-page .chapter-nav .back-link {
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #6e6b64;
+  font-size: 0.9rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reading-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+.reading-independent-page .handbook-layout {
+  max-width: 800px;
+  margin: 0 auto;
+  background: transparent;
+  position: relative;
+}
+.reading-independent-page .handbook-layout .handbook-header, .reading-independent-page .handbook-layout .handbook-footer {
+  text-align: center;
+  font-family: "Bigelow Rules", serif;
+  color: rgba(26, 26, 26, 0.6);
+  font-size: 0.8rem;
+  margin: 2rem 0;
+}
+.reading-independent-page .handbook-layout .handbook-header .decorative-line, .reading-independent-page .handbook-layout .handbook-header .decorative-line-bottom, .reading-independent-page .handbook-layout .handbook-footer .decorative-line, .reading-independent-page .handbook-layout .handbook-footer .decorative-line-bottom {
+  display: flex;
+  align-items: center;
+}
+.reading-independent-page .handbook-layout .handbook-header .decorative-line::before, .reading-independent-page .handbook-layout .handbook-header .decorative-line::after, .reading-independent-page .handbook-layout .handbook-header .decorative-line-bottom::before, .reading-independent-page .handbook-layout .handbook-header .decorative-line-bottom::after, .reading-independent-page .handbook-layout .handbook-footer .decorative-line::before, .reading-independent-page .handbook-layout .handbook-footer .decorative-line::after, .reading-independent-page .handbook-layout .handbook-footer .decorative-line-bottom::before, .reading-independent-page .handbook-layout .handbook-footer .decorative-line-bottom::after {
+  content: "————— ☙ —————";
+  flex: 1;
+  letter-spacing: -2px;
+}
+.reading-independent-page .handbook-layout .handbook-header .decorative-line span, .reading-independent-page .handbook-layout .handbook-header .decorative-line-bottom span, .reading-independent-page .handbook-layout .handbook-footer .decorative-line span, .reading-independent-page .handbook-layout .handbook-footer .decorative-line-bottom span {
+  padding: 0 1rem;
+}
+.reading-independent-page .handbook-layout .handbook-entry {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-visual {
+  flex: 0 0 150px;
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-visual .entry-img {
+  width: 100%;
+  mix-blend-mode: multiply;
+  filter: sepia(0.2) contrast(1.1);
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-visual .entry-img.roots-variant {
+  transform: rotate(-10deg) scaleX(-1);
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-visual .entry-img.garden-variant {
+  transform: scale(1);
+  filter: hue-rotate(10deg) multiply;
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-text {
+  flex: 1;
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-text .entry-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: 2.2rem;
+  margin: 0 0 1rem 0;
+  color: #1A1A1A;
+  line-height: 1;
+}
+.reading-independent-page .handbook-layout .handbook-entry .entry-text p {
+  font-family: "EB Garamond", serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;
+  margin: 0;
+  color: #333;
+}
+.reading-independent-page .handbook-layout .title-block {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.reading-independent-page .handbook-layout .title-block .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: 4rem;
+  margin: 0;
+}
+.reading-independent-page .handbook-layout .title-block .literary-quote {
+  font-family: "Lora", serif;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.migration-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.butterfly-ink {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+  will-change: transform, left, top;
+  transform: rotate(90deg);
+  animation: migration-flight linear forwards, flap-3-frames 0.3s infinite ease-in-out;
+}
+
+@keyframes flap-3-frames {
+  0%, 100% {
+    background-image: url("../../img/mariposa-abierta-new.png");
+  }
+  25%, 75% {
+    background-image: url("../../img/mariposa-media.png");
+  }
+  50% {
+    background-image: url("../../img/mariposa-cerrada-new.png");
+  }
+}
+@keyframes migration-flight {
+  0% {
+    left: -10%;
+    top: var(--y-pos);
+  }
+  25% {
+    margin-top: -15px;
+  }
+  50% {
+    margin-top: 15px;
+  }
+  75% {
+    margin-top: -10px;
+  }
+  100% {
+    left: 110%;
+    top: var(--y-pos);
+  }
+}
+.butterfly-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.butterfly-ink {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  transform: rotate(90deg);
+  transform-origin: center center;
+  animation: butterfly-path linear forwards, butterfly-flap-cycle 0.4s infinite ease-in-out;
+}
+
+@keyframes butterfly-flap-cycle {
+  0%, 100% {
+    background-image: url("../../img/mariposa-cerrada-new.png");
+    transform: scale(1);
+  }
+  25%, 75% {
+    background-image: url("../../img/mariposa-media.png");
+  }
+  50% {
+    background-image: url("../../img/mariposa-cerrada-new.png");
+    transform: scale(0.9) translateY(-2px);
+  }
+}
+@keyframes butterfly-path {
+  0% {
+    left: -10%;
+    top: var(--y-start);
+  }
+  30% {
+    transform: translateY(-40px) rotate(-5deg);
+  }
+  60% {
+    transform: translateY(30px) rotate(5deg);
+  }
+  100% {
+    left: 110%;
+    top: var(--y-start);
+  }
+}
+.dancing-independent-page {
+  background-color: #EAD8B1;
+  background-image: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%), url("https://www.transparenttextures.com/patterns/p6.png");
+  background-blend-mode: multiply;
+  background-color: #EAD8B1;
+  min-height: 100vh;
+  padding: 1rem;
+  color: #2a2a2a;
+}
+.dancing-independent-page .chapter-nav {
+  padding: 2rem 0;
+}
+.dancing-independent-page .chapter-nav .back-link {
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #6e6b64;
+  font-size: 0.9rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.dancing-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+.dancing-independent-page .rhythmic-atmosphere {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+.dancing-independent-page .rhythmic-atmosphere .jugend-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+}
+.dancing-independent-page .rhythmic-atmosphere .jugend-header .header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Bigelow Rules", serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.dancing-independent-page .rhythmic-atmosphere .jugend-header .header-meta span {
+  font-size: 3rem;
+  font-family: "Bigelow Rules", serif !important;
+}
+.dancing-independent-page .rhythmic-atmosphere .art-nouveau-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .dancing-independent-page .rhythmic-atmosphere .art-nouveau-container {
+    grid-template-columns: 1fr 300px 1fr;
+    gap: 1rem;
+  }
+}
+.dancing-independent-page .rhythmic-atmosphere .visual-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  order: -1;
+}
+@media (min-width: 768px) {
+  .dancing-independent-page .rhythmic-atmosphere .visual-center {
+    order: 0;
+  }
+}
+.dancing-independent-page .rhythmic-atmosphere .visual-center .central-botanical {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1) sepia(0.2);
+}
+.dancing-independent-page .rhythmic-atmosphere .visual-center .ornamental-title {
+  text-align: center;
+  margin-top: -30px;
+  background: #EAD8B1;
+  padding: 0 1rem;
+}
+.dancing-independent-page .rhythmic-atmosphere .visual-center .ornamental-title .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 0.8;
+  color: #1A1A1A;
+}
+.dancing-independent-page .rhythmic-atmosphere .text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.dancing-independent-page .rhythmic-atmosphere .text-column .text-block p {
+  font-family: "EB Garamond", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: justify;
+  position: relative;
+}
+.dancing-independent-page .rhythmic-atmosphere .text-column .text-block p::first-letter {
+  font-family: "Bigelow Rules", serif;
+  font-size: 2.5rem;
+  color: #a62626;
+  float: left;
+  margin-right: 0.5rem;
+  line-height: 1;
+}
+.dancing-independent-page .rhythmic-atmosphere .jugend-footer {
+  text-align: center;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1rem 0;
+  font-family: "Bigelow Rules", serif;
+  font-size: 1.2rem;
+}
+
+.dancing-independent-page .visual-center {
+  position: relative;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">✨</text></svg>'), auto;
+}
+.dancing-independent-page .visual-center .central-botanical {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1) sepia(0.2);
+  animation: branch-sway 6s ease-in-out infinite alternate;
+  transition: transform 0.3s ease-out;
+}
+.dancing-independent-page .visual-center .central-botanical:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.pollen-particle {
+  position: absolute;
+  background: radial-gradient(circle, #D4AF37 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 0 10px #D4AF37;
+  animation: pollen-float 2s ease-out forwards;
+}
+
+@keyframes branch-sway {
+  0% {
+    transform: rotate(-1deg) translateY(0);
+  }
+  100% {
+    transform: rotate(1deg) translateY(-5px);
+  }
+}
+@keyframes pollen-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translate(0, -10px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), -80px) scale(0.5);
+  }
+}
+.falling-flowers-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.falling-flower {
+  position: absolute;
+  background-image: url("../../img/flor1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  will-change: transform, top;
+  animation-name: fall-and-sway;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall-and-sway {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(var(--sway-distance)) rotate(180deg);
+  }
+  100% {
+    top: 110%;
+    transform: translateX(0) rotate(360deg);
+  }
+}
+.rain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ink-drop {
+  position: absolute;
+  background-color: rgba(26, 26, 26, 0.4);
+  width: 1px;
+  height: 60px;
+  mix-blend-mode: multiply;
+  animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+.chess-independent-page {
+  background-color: #EAD8B1;
+  background-image: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%), url("https://www.transparenttextures.com/patterns/p6.png");
+  background-blend-mode: multiply;
+  background-color: #EAD8B1;
+  min-height: 100vh;
+  padding: 0;
+  overflow-x: hidden;
+}
+.chess-independent-page .chapter-nav {
+  padding: 1.5rem 1rem;
+}
+@media (min-width: 768px) {
+  .chess-independent-page .chapter-nav {
+    padding: 2rem;
+  }
+}
+.chess-independent-page .chapter-nav .back-link {
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #6e6b64;
+  font-size: 0.85rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.chess-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+.chess-independent-page .strategy-atmosphere {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere {
+    padding: 2rem 1.5rem;
+  }
+}
+.chess-independent-page .strategy-atmosphere .chess-coordinates {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Bigelow Rules", serif;
+  font-size: 0.7rem;
+  color: rgba(26, 26, 26, 0.4);
+  padding: 0.5rem;
+  letter-spacing: 0.1rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere .chess-coordinates {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.2rem;
+  }
+}
+.chess-independent-page .strategy-atmosphere .visual-header {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.chess-independent-page .strategy-atmosphere .visual-header .technical-sketch {
+  display: inline-block;
+  position: relative;
+}
+.chess-independent-page .strategy-atmosphere .visual-header .technical-sketch .technical-draw {
+  max-width: 150px;
+  width: 100%;
+  mix-blend-mode: multiply;
+  filter: contrast(1.5) grayscale(0.6);
+  opacity: 0.85;
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere .visual-header .technical-sketch .technical-draw {
+    max-width: 300px;
+  }
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .chapter-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .chapter-header .move-notation {
+  font-family: "Bigelow Rules", serif;
+  font-size: 1.2rem;
+  color: #a62626;
+  opacity: 0.7;
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .chapter-header .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(2.5rem, 10vw, 4.5rem);
+  line-height: 1;
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .annotation {
+  margin-bottom: 3rem;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(166, 38, 38, 0.2);
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere .letter-fragmented .annotation {
+    padding-left: 2rem;
+  }
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .annotation .note-tag {
+  font-family: "Bigelow Rules", serif;
+  font-size: 1.4rem;
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere .letter-fragmented .annotation .note-tag {
+    font-size: 1.8rem;
+  }
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .annotation .note-tag {
+  color: #a62626;
+  margin-bottom: 0.3rem;
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .annotation p {
+  font-family: "EB Garamond", serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+@media (min-width: 768px) {
+  .chess-independent-page .strategy-atmosphere .letter-fragmented .annotation p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
+.chess-independent-page .strategy-atmosphere .letter-fragmented .annotation::before {
+  content: "⊕";
+  position: absolute;
+  left: -7px;
+  top: 0;
+  background: #EAD8B1;
+  color: #a62626;
+  font-size: 0.8rem;
+}
+
+.checkmate-atmosphere {
+  position: relative;
+  background-color: #EAD8B1;
+}
+
+.ghost-board-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 80px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.board-square {
+  width: 80px;
+  height: 80px;
+  border: 0.5px solid rgba(26, 26, 26, 0.05);
+  transition: background-color 0.8s ease, transform 0.5s ease;
+}
+.board-square.square-dark {
+  background-color: rgba(26, 26, 26, 0.02);
+}
+.board-square.is-active {
+  background-color: rgba(112, 72, 30, 0.4);
+  transform: scale(0.95);
+  transition: background-color 0.1s ease;
+}
+
+.puzzles-independent-page {
+  background-color: #EAD8B1;
+  background-image: url(../img/gato-puzzle.png);
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 1rem 0;
+  overflow-x: hidden;
+}
+.puzzles-independent-page .chapter-nav {
+  padding: 1.5rem 1rem;
+}
+@media (min-width: 768px) {
+  .puzzles-independent-page .chapter-nav {
+    padding: 2rem;
+  }
+}
+.puzzles-independent-page .chapter-nav .back-link {
+  background-color: rgba(234, 216, 177, 0.95);
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  font-family: "EB Garamond", serif;
+  text-decoration: none;
+  color: #1A1A1A;
+  font-size: 0.85rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 5px 25px;
+}
+.puzzles-independent-page .chapter-nav .back-link:hover {
+  color: #a62626;
+}
+.puzzles-independent-page .puzzle-handbook {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.puzzles-independent-page .puzzle-handbook .handbook-header {
+  background-color: rgba(234, 216, 177, 0.95);
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.puzzles-independent-page .puzzle-handbook .handbook-header .page-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Bigelow Rules", serif;
+  font-size: 1rem;
+  color: #1A1A1A;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.3);
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+.puzzles-independent-page .puzzle-handbook .handbook-header .chapter-title {
+  font-family: "Bigelow Rules", serif;
+  font-size: clamp(3rem, 10vw, 5rem);
+  margin: 1.5rem 0 1rem;
+  color: #1A1A1A;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+.puzzles-independent-page .puzzle-handbook .handbook-header .decorative-separator {
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.puzzles-independent-page .puzzle-handbook .handbook-header .decorative-separator img {
+  width: 140px;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+}
+.puzzles-independent-page .puzzle-handbook .visual-header {
+  margin-bottom: 4rem;
+}
+.puzzles-independent-page .puzzle-handbook .visual-header .puzzle-frame {
+  background-color: rgba(234, 216, 177, 0.95);
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  padding: 15px;
+  border: 3px solid rgba(26, 26, 26, 0.4);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.puzzles-independent-page .puzzle-handbook .visual-header .puzzle-frame .main-illustration {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  filter: contrast(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.puzzles-independent-page .puzzle-handbook .puzzle-grid {
+  display: grid;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .puzzles-independent-page .puzzle-handbook .puzzle-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.puzzles-independent-page .puzzle-handbook .puzzle-grid .puzzle-step {
+  background-color: rgba(234, 216, 177, 0.95);
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  position: relative;
+}
+.puzzles-independent-page .puzzle-handbook .puzzle-grid .puzzle-step .step-tag {
+  font-family: "Bigelow Rules", serif;
+  font-size: 1.5rem;
+  color: #a62626;
+  display: block;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(166, 38, 38, 0.3);
+  padding-bottom: 0.5rem;
+}
+.puzzles-independent-page .puzzle-handbook .puzzle-grid .puzzle-step p {
+  font-family: "EB Garamond", serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  text-align: justify;
+  color: #1A1A1A;
+}
+.puzzles-independent-page .puzzle-handbook .handbook-footer {
+  margin-top: 5rem;
+  text-align: center;
+  background-color: rgba(234, 216, 177, 0.95);
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  padding: 1.5rem;
+  font-family: "Lora", serif;
+  font-style: italic;
+  color: #1A1A1A;
+}
+
+.final-independent-page {
+  background-color: #f8f9fa;
+  margin: 0;
+  overflow-x: hidden;
+}
+.final-independent-page .chapter-nav {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 100;
+}
+.final-independent-page .chapter-nav .back-link {
+  color: white;
+  text-decoration: none;
+  font-family: "EB Garamond", serif;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 20px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+}
+
+.ergaki-layout .hero-section {
+  height: 50vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url("../img/kris-yo.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+@media (min-width: 768px) {
+  .ergaki-layout .hero-section {
+    height: 100vh;
+  }
+}
+@media (min-width: 1200px) {
+  .ergaki-layout .hero-section {
+    height: 120vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url("../img/kris-yo.png") top center/cover no-repeat;
+  }
+}
+.ergaki-layout .hero-section .main-title {
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-family: "Bigelow Rules", serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+.ergaki-layout .hero-section .hero-subtitle {
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+.ergaki-layout .content-block {
+  max-width: 1200px;
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+@media (min-width: 768px) {
+  .ergaki-layout .content-block {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+  }
+}
+.ergaki-layout .content-block .section-label {
+  font-family: "EB Garamond", serif;
+  color: #a62626;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #a62626;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+.ergaki-layout .content-block .text-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+.ergaki-layout .image-mask-container {
+  position: relative;
+  width: 100%;
+}
+.ergaki-layout .image-mask-container .torn-edge-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  scale: 1.1;
+  mask-image: url("../img/webkit-mask-2.png");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+@media (min-width: 768px) {
+  .ergaki-layout .image-mask-container .torn-edge-img {
+    scale: 1.5;
+  }
+}
+.ergaki-layout .final-message-block {
+  background: #2c3e50;
+  color: white;
+  padding: 10rem 2rem;
+  text-align: center;
+  background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url("src/img/textura-atmosferica.jpg") center/cover;
+}
+.ergaki-layout .final-message-block .letter-overlay {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  line-height: 2;
+}
+.ergaki-layout .final-message-block .final-sign {
+  margin-top: 4rem;
+  font-family: "Bigelow Rules", serif;
+  font-size: 4rem;
+  color: #a62626;
+}
+
+html * {
+  font-family: "EB Garamond", serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #1A1A1A;
+  background-color: #EAD8B1;
+  background-color: #EAD8B1;
+  background-image: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.02) 100%), url("https://www.transparenttextures.com/patterns/p6.png");
+  background-blend-mode: multiply;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*# sourceMappingURL=style.css.map */

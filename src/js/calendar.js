@@ -13,8 +13,8 @@ export function initChapterUnlock() {
     const currentMonth = today.getMonth(); // 0 = Enero
 
     chapters.forEach((chapter, index) => {
-        // dayToUnlock será 15, 16, 17... (para tus pruebas de hoy)
-        const dayToUnlock = 9 + index; 
+        // dayToUnlock será 15, 16, 17... (para tus pruebas de hoy) original 22
+        const dayToUnlock = 10 + index; 
         const onclickAttr = chapter.getAttribute('onclick');
         if (!onclickAttr) return;
 
@@ -72,7 +72,7 @@ function handleFirstUnlock(day, title, url) {
     
     // --- LÓGICA DE MENSAJE PERSONALIZADO ---
     // Calculamos cuánto falta para el 28 de enero
-    const birthday = 15; // 28
+    const birthday = 28; // 28 para calar 15
     const daysLeft = birthday - day;
 
     let message = "";
