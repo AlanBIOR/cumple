@@ -58,7 +58,7 @@ body, html, #app {
   display: inline-block;
 }
 .main-footer .medical-note::before {
-  content: "℞";
+  content: "TQM";
   font-family: "Bigelow Rules", serif;
   color: #a62626;
   font-size: 1.8rem;
@@ -481,7 +481,6 @@ body, html, #app {
   content: "";
   position: absolute;
   left: 50%;
-  height: 100%;
   width: 1px;
   background: rgba(26, 26, 26, 0.1);
 }
@@ -723,9 +722,7 @@ body, html, #app {
   min-height: 100vh;
   padding: 2rem;
 }
-.reading-independent-page .chapter-nav {
-  padding: 2rem;
-}
+
 .reading-independent-page .chapter-nav .back-link {
   font-family: "EB Garamond", serif;
   text-decoration: none;
@@ -763,7 +760,7 @@ body, html, #app {
 }
 .reading-independent-page .handbook-layout .handbook-entry {
   display: flex;
-  gap: 2rem;
+  gap: 0.5rem;
   margin-bottom: 4rem;
   align-items: center;
 }
@@ -1118,7 +1115,7 @@ body, html, #app {
   }
 }
 .rain-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -1218,7 +1215,7 @@ body, html, #app {
   position: relative;
 }
 .chess-independent-page .strategy-atmosphere .visual-header .technical-sketch .technical-draw {
-  max-width: 150px;
+  max-width: 250px;
   width: 100%;
   mix-blend-mode: multiply;
   filter: contrast(1.5) grayscale(0.6);

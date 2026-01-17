@@ -29,7 +29,7 @@
 
     // Detalle del símbolo médico ℞ al inicio de la nota
     &::before {
-      content: '℞'; 
+      content: 'TQM'; 
       font-family: $font-vintage; // Bigelow Rules para el toque victoriano
       color: $accent-color;
       font-size: 1.8rem;

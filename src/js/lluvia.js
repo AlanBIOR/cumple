@@ -31,5 +31,5 @@ export function initRain() {
     };
 
     // Crear gotas constantemente
-    setInterval(createDrop, 50); // Genera una gota cada 50ms para un efecto denso
+    setInterval(createDrop, 40); // Genera una gota cada 50ms para un efecto denso
 }
