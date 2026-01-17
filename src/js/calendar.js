@@ -72,7 +72,7 @@ function handleFirstUnlock(day, title, url) {
     
     // --- LÓGICA DE MENSAJE PERSONALIZADO ---
     // Calculamos cuánto falta para el 28 de enero
-    const birthday = 16; // 28 para calar 15
+    const birthday = 28; // 28 para calar 15
     const daysLeft = birthday - day;
 
     let message = "";

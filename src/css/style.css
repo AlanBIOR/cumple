@@ -840,13 +840,13 @@ body, html, #app {
 
 @keyframes flap-3-frames {
   0%, 100% {
-    background-image: url("../../img/mariposa-abierta-new.png");
+    background-image: url("../img/mariposa-abierta-new.png");
   }
   25%, 75% {
-    background-image: url("../../img/mariposa-media.png");
+    background-image: url("../img/mariposa-media.png");
   }
   50% {
-    background-image: url("../../img/mariposa-cerrada-new.png");
+    background-image: url("../img/mariposa-cerrada-new.png");
   }
 }
 @keyframes migration-flight {
