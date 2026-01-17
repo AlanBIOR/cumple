@@ -3,9 +3,12 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  // SUSTITUYE 'nombre-de-tu-repositorio' por el nombre exacto de tu repo en GitHub
+  base: '/cumple/', 
+
   server: {
     watch: {
-      usePolling: true, // Esto obliga a Vite a revisar los archivos constantemente
+      usePolling: true,
     },
   },
   build: {
