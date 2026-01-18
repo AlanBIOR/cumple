@@ -14,7 +14,7 @@ export function initChapterUnlock() {
 
     chapters.forEach((chapter, index) => {
         // dayToUnlock será 15, 16, 17... (para tus pruebas de hoy) original 22
-        const dayToUnlock = 22 + index; 
+        const dayToUnlock = 15 + index; 
         const onclickAttr = chapter.getAttribute('onclick');
         if (!onclickAttr) return;
 
